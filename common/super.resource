@@ -5,5 +5,10 @@ Library             DateTime
 Library             OperatingSystem
 Library             String
 Library             Browser
+Library             ../library/CustomLibrary.py
 Resource            ../common/global_config.resource
 Resource            ../keywords/common_keywords.resource
+Resource            ../keywords/login_page.resource
+Resource            ../keywords/dashboard_page.resource
+Resource            ../object_repository/login_page.resource
+Resource            ../object_repository/dashboard_page.resource
