@@ -31,26 +31,29 @@ Select Menu In Navigation Wheel
     Click    svg > g:nth-child(${menu_key})
 
 Select Current Timeslot
-    [Documentation]    After click on now button in dashboard page then it will redirect to current timeslot.
+    [Documentation]    After click on now button in dashboard page then it will redirect to 
+    ...    current timeslot.
     Click    ${button.now}
     Click    ${div.selected.timeslot}
 
 Select Appointment Date
-    [Documentation]    Enter appointment date in dashboard pageavigation menu link and wait for navigation wheel should be displayed.
+    [Documentation]    Enter appointment date in dashboard page navigation menu link and wait 
+    ...    for navigation wheel should be displayed.
     [Arguments]    ${date}
     Fill Text    ${text.date}    ${date}
     Wait Until Element Is Visible    locator=${label.addeditbooking}    timeout=${SHORT_WAIT}
 
 Select Timeslot
-    [Documentation]    Simulate click action on navigation menu link and wait for navigation wheel should be displayed.
+    [Documentation]    Simulate double click action on timeslot in dashboard page to create new booking.
     [Arguments]    ${time}
-    Sleep    15s
+    Sleep    10s
     Scroll To Element    xpath=//div[@class='time'][text()='${time}']
     Sleep    3s
     Click With Options    xpath=//div[@class='time'][text()='${time}']    left    clickCount=2    force=True
 
 Validate Booking Timeslot Is Created
-    [Documentation]    Simulate click action on navigation menu link and wait for navigation wheel should be displayed.
+    [Documentation]    Validates that a booking timeslot has been successfully created.
+    ...  Checks the visibility of the timeslot and verifies the cell number and debtor name.
     [Arguments]    ${time}    ${expected_cell_no}    ${expected_name}
     Wait Until Element Is Visible    locator=xpath=//div[contains(@class,'start') and text()='${time}']/ancestor::div[contains(@data-bind,'borderRightColor')]//span[@class='account-status none']   timeout=${SHORT_WAIT}
     ${element_status}    Is Element Visible    xpath=//div[contains(@class,'start') and text()='${time}']
@@ -61,7 +64,8 @@ Validate Booking Timeslot Is Created
     Should Contain    ${actual_name}    ${expected_name}
 
 Validate Booking Timeslot Is Not Created
-    [Documentation]    Simulate click action on navigation menu link and wait for navigation wheel should be displayed.
+    [Documentation]    Validates that a booking timeslot has not been created.
+    ...  Checks that the timeslot is not visible on the dashboard.
     [Arguments]    ${time}
     ${element_status}    Is Element Visible    xpath=//div[@class='start'][text()='${time}']   timeout=${SHORT_WAIT}
     Should Be Equal   ${element_status}  False

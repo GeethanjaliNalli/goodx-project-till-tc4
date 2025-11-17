@@ -4,22 +4,23 @@ Resource    ../Common/super.resource
 
 *** Keywords ***
 Save Booking Form
-    [Documentation]    Selects an option from dropdown using label, value, or index.
+    [Documentation]    Save Add Edit Booking Form
     Click    ${button.save}
     Wait Until Element Is Invisible    ${label.addeditbooking}    timeout=${LONG_WAIT}
 
 Close Booking Form
-    [Documentation]    Selects an option from dropdown using label, value, or index.
+    [Documentation]    Close Add Edit Booking Form
     Click    ${button.close}
     Handle Attention Alert    accept
     Wait Until Element Is Invisible    ${label.addeditbooking}    timeout=5s
 
 Select Duplicate Debtor
-    [Documentation]    Selects an option from dropdown using label, value, or index.
+    [Documentation]    Click on Duplicate Debtor button in Add Edit Booking Form to select existing debtor.
     Click    ${button.duplicate.debtor}
     Sleep    2s
 
 Enter Form Data
+    [Documentation]    Enters data into the booking form fields based on the provided dictionary.
     [Arguments]    &{form_data}
     FOR    ${field}    ${value}    IN    &{form_data}
         # Resolve locator from the locators dictionary

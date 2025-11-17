@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    This File has all the Test Cases related to the login page
+Documentation    This File has all the Test Casess related to the login page, dashboard page and booking page
 Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application

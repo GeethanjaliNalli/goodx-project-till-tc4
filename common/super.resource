@@ -4,7 +4,6 @@ Library             Collections
 Library             DateTime
 Library             OperatingSystem
 Library             String
-# Library             Browser
 Library             ../library/CustomLibrary.py
 Resource            ../common/global_config.resource
 Resource            ../keywords/common_keywords.resource

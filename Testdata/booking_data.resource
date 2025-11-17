@@ -1,13 +1,8 @@
 *** Settings ***
-Documentation    This File has all the Test Cases related to the login page
+Documentation    This file has dictionaries for booking data used in test cases
 Resource    ../common/super.resource
 
 *** Variables ***
-# ${TODAY}=        Get Today
-# ${TOMORROW}=     Get Tomorrow
-
-# ${TODAY}=        Get Current Date    result_format=%yyyy-%mm-%dd
-# ${TOMORROW}=     Get Current Date    result_format=%yyyy-%mm-%dd   increment=1 day
 
 &{BOOKING_INFO}
     ...    select.type=Consultation

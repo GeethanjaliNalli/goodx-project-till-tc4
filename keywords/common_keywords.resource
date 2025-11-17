@@ -41,15 +41,15 @@ Handle Attention Alert
     END
 
 Wait Until Element Is Visible
-    [Documentation]    Handles the attention alert based on the specified action.
-    ...  Dismisses or accepts the alert by clicking the appropriate button.
+    [Documentation]    Waits until the specified element is visible on the page.
+    ...  Uses the provided timeout duration for waiting.
     [Arguments]    ${locator}    ${timeout}
     Wait For Elements State    ${locator}    attached    timeout=${timeout}
     Wait For Elements State    ${locator}    visible    timeout=${timeout}
 
 Wait Until Element Is Invisible
-    [Documentation]    Handles the attention alert based on the specified action.
-    ...  Dismisses or accepts the alert by clicking the appropriate button.
+    [Documentation]    Waits until the specified element is no longer visible on the page.
+    ...  Uses the provided timeout duration for waiting.
     [Arguments]    ${locator}    ${timeout}
     Wait For Elements State    ${locator}    hidden    timeout=${timeout}
 
