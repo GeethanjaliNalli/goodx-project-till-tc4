@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    This common Resource file has all the Common keywords
+Documentation    This common resource file has all the common keywords
 Resource    ../Common/super.resource
 
 
@@ -33,9 +33,28 @@ Handle Attention Alert
     [Documentation]    Handles the attention alert based on the specified action.
     ...  Dismisses or accepts the alert by clicking the appropriate button.
     [Arguments]    ${action}=dismiss
-    Wait Until Element Is Visible    locator=xpath=//span[text()='Attention!']    timeout=${LONG_WAIT}
+    Wait Until Element Is Visible    locator=${ATTENTION_ALERT}    timeout=${LONG_WAIT}
     IF    '${action}'=='dismiss'
         Click    ${button.attention.cancel}
     ELSE IF    '${action}'=='accept'
         Click    ${button.attention.ok}
     END
+
+Wait Until Element Is Visible
+    [Documentation]    Handles the attention alert based on the specified action.
+    ...  Dismisses or accepts the alert by clicking the appropriate button.
+    [Arguments]    ${locator}    ${timeout}
+    Wait For Elements State    ${locator}    attached    timeout=${timeout}
+    Wait For Elements State    ${locator}    visible    timeout=${timeout}
+
+Wait Until Element Is Invisible
+    [Documentation]    Handles the attention alert based on the specified action.
+    ...  Dismisses or accepts the alert by clicking the appropriate button.
+    [Arguments]    ${locator}    ${timeout}
+    Wait For Elements State    ${locator}    hidden    timeout=${timeout}
+
+Select From Dropdown
+    [Documentation]    Selects an option from dropdown using label, value, or index.
+    [Arguments]    ${locator}    ${option}    ${select_by}=label
+    Wait Until Element Is Visible    ${locator}    timeout=10s
+    Select Options By    ${locator}    ${select_by}    ${option}
