@@ -40,3 +40,8 @@ ${label.addeditbooking}    [class="ui-dialog-title"]
 ${button.duplicate.debtor}     .duplicate-debtor
 ${button.save}    [type="submit"]
 ${button.close}    .pull-left.btn-close
+${button.delete}    .btn-delete.btn-danger
+${input.search}    //input[@placeholder='Search Debtor by *File no., +MA Scheme, #MA no., Account, Name, Surname, ID or Mobile.']
+${button.warning}    //button[text()='Ok']
+${label.warning}    //span[text()='Warning']
+${label.warning.message}    //div[contains(text(),'Some fields are invalid.')]

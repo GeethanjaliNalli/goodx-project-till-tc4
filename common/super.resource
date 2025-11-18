@@ -15,3 +15,4 @@ Resource            ../object_repository/login_page.resource
 Resource            ../object_repository/dashboard_page.resource
 Resource            ../object_repository/add_edit_page.resource
 Resource            ../Testdata/booking_data.resource
+Resource            ../Testdata/constants.resource

@@ -1,5 +1,6 @@
 from datetime import date
 from dateutil.relativedelta import relativedelta
+from robot.libraries.BuiltIn import BuiltIn
 import time
 import random
 import openpyxl
@@ -45,3 +46,7 @@ class CustomLibrary(object):
         for keyword in ["UNIQUE", "Unique", "unique"]:
             testdata = str(testdata).replace(keyword, timestamp)
         return testdata
+
+    def wait_until(self, seconds):
+        """Pauses execution for the specified number of seconds."""
+        BuiltIn().sleep((seconds))

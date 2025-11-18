@@ -53,4 +53,4 @@ Thumbs.db
 *.png
 *.jpeg
 *.jpg
-playwright-log.txt
+playwright-log*
