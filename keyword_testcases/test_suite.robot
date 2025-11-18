@@ -14,7 +14,7 @@ TC_01 Validate User Is Able To Login The Application With Valid Username And Pas
     Handle Attention Alert    ${DISMISS_ATTENTION_ALERT}
 
 TC_02 Validate User Is Able To Create New Patient Booking
-    [Documentation]    Verifies that the user can successfully log in, access the Diary page, 
+    [Documentation]    Verifies that the user can successfully log in, access the Diary page,
     ...    and perform a new patient booking.
     Select Menu In Navigation Wheel    DIARY
     Select Timeslot    ${BOOKING_INFO}[input.time]
@@ -22,7 +22,7 @@ TC_02 Validate User Is Able To Create New Patient Booking
     Select Duplicate Debtor
     Save Booking Form
     Validate Booking Timeslot Is Created    ${BOOKING_INFO}[input.time]    ${EXPECTED_DATA}[cell_no]    ${EXPECTED_DATA}[debtor_name]
-  
+
 TC_03 Validate User Is Unable To Create New Patient Booking
     [Documentation]    Verifies that the user can successfully log in, access the Diary page,
     ...    and is unable to perform a new patient booking.
@@ -49,7 +49,7 @@ TC_05 Validate User Is Able To Create Booking For Existing patient
     Select Menu In Navigation Wheel    DIARY
     Select Timeslot    ${BOOKING_INFO}[input.time]
     Create Patient Booking With Existing Debtor   ${BOOKING_INFO}    ${EXISTING_DEBTOR_NAME}
-    Validate Booking Timeslot Is Created For Exisiting Patient    ${BOOKING_INFO}[input.time]
+    Validate Booking Timeslot Is Created For Existing Patient    ${BOOKING_INFO}[input.time]
 
 TC_06 Validate User Is Unable To Create Booking For Existing patient When Form Is Closed
     [Documentation]    Verifies that the user can log in and attempt to create a booking with
