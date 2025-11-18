@@ -18,5 +18,6 @@ Login To Application
     [Documentation]    Enters the provided username and password into the login fields.
     ...  Waits for elements to load, fills in credentials, and clicks the login button.
     [Arguments]    ${username}    ${password}
+    Launch GoodX Web Application    ${BROWSER_NAME}    ${URL}
     Enter Username And Password    ${username}    ${password}
     Handle Attention Alert    accept
