@@ -1,13 +1,12 @@
 *** Settings ***
-Documentation    This file has dictionaries for booking data used in test cases
+Documentation    This file contains the dictionaries for booking data used in the test cases.
 Resource    ../common/super.resource
 
 *** Variables ***
-
 &{BOOKING_INFO}
     ...    select.type=Consultation
     ...    select.status=Booked
-    ...    input.time=10:45
+    ...    input.time=09:00
     ...    input.duration=15
     ...    input.reason=Medical Support12
 
@@ -43,6 +42,5 @@ Resource    ../common/super.resource
     ...    input.reason=Need wheelchair support
 
 &{EXPECTED_DATA}
-    # ...    timeslot=14:30
     ...    debtor_name=MR Carey, AC, Alex
     ...    cell_no=9987654321

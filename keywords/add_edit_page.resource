@@ -22,14 +22,10 @@ Enter Form Data
     [Documentation]    Enters data into the booking form fields based on the values provided in the dictionary.
     [Arguments]    &{form_data}
     FOR    ${field}    ${value}    IN    &{form_data}
-        # Resolve locator from the locators dictionary
         ${locator}=    Get From Dictionary    ${BOOKING_FORM_LOCATORS}    ${field}
-        # Skip empty values
         Run Keyword If    '${value}' == ''    Continue For Loop
-        # If the key represents a select/dropdown (start with 'select.')
         Run Keyword If    '${field}'.startswith('select.')
         ...    Select From Dropdown    ${locator}    ${value}
-        # If the key represents an input/textarea (start with 'input.')
         Run Keyword If    '${field}'.startswith('input.')
         ...    Fill Text    ${locator}    ${value}
     END

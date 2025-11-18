@@ -48,7 +48,7 @@ Select Timeslot
     [Documentation]    Simulates a double-click action on a timeslot in the Dashboard page
     ...     to create a new booking.
     [Arguments]    ${time}
-    Sleep    10s
+    Sleep    3s
     Scroll To Element    xpath=//div[@class='time'][text()='${time}']
     Click With Options    xpath=//div[@class='time'][text()='${time}']    left    clickCount=2    force=True
 

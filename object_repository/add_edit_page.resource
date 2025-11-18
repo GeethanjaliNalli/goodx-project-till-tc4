@@ -22,7 +22,6 @@ Documentation       This file contains all types of locators for the Add/Edit Bo
 ...    select.gender=div >.input-sm.gender
 ...    input.initials=div >.input-sm.initials
 ...    select.title=div >.input-sm.title
-# ...    button.duplicate.debtor=.duplicate-debtor
 ...    input.name=//label[t[normalize-space(text())='Name']]/input
 ...    input.patient.surname=//label[t[text()='Surname']]/input
 ...    input.patient.cellno=label > .input-sm.cellnr
