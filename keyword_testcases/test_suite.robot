@@ -13,7 +13,7 @@ TC_01 Validate User Is Able To Login The Application With Valid Username And Pas
     Click Logout
     Handle Attention Alert    dismiss
 
-TC_02 Validate User Is Able To Perform New Patient Booking
+TC_02 Validate User Is Able To Create New Patient Booking
     [Documentation]    Verifies that the user can successfully log in, access the Diary page, 
     ...    and perform a new patient booking.
     Select Menu In Navigation Wheel    DIARY
@@ -23,7 +23,7 @@ TC_02 Validate User Is Able To Perform New Patient Booking
     Save Booking Form
     Validate Booking Timeslot Is Created    ${BOOKING_INFO}[input.time]    ${EXPECTED_DATA}[cell_no]    ${EXPECTED_DATA}[debtor_name]
 
-TC_03 Validate User Is Unable To Perform New Patient Booking
+TC_03 Validate User Is Unable To Create New Patient Booking
     [Documentation]    Verifies that the user can successfully log in, access the Diary page,
     ...    ...and is unable to perform a new patient booking.
     Select Menu In Navigation Wheel    DIARY
@@ -33,7 +33,7 @@ TC_03 Validate User Is Unable To Perform New Patient Booking
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
 
-TC_04 Validate User Is Unable To Perform New Patient Booking Without Name
+TC_04 Validate User Is Unable To Create New Patient Booking Without Name
     [Documentation]    Verifies that the user can successfully log in, access the Diary page,
     ...    ... and is not able to perform a new patient booking without entering a name.
     Select Menu In Navigation Wheel    DIARY

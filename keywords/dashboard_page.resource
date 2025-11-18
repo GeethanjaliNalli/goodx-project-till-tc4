@@ -58,7 +58,7 @@ Validate Booking Timeslot Is Created
     [Arguments]    ${time}    ${expected_cell_no}    ${expected_name}
     Wait Until Element Is Visible    locator=xpath=//div[contains(@class,'start') and text()='${time}']/ancestor::div[contains(@data-bind,'borderRightColor')]//span[@class='account-status none']   timeout=${SHORT_WAIT}
     ${element_status}    Is Element Visible    xpath=//div[contains(@class,'start') and text()='${time}']
-    Should Be True    ${element_status}
+    Should Be True   ${element_status}
     ${actual_cell_no}    Get Text    xpath=//div[contains(@class,'start') and text()='${time}']/ancestor::div[contains(@data-bind,'borderRightColor')]//span[contains(@data-bind,'mobile_no')]
     Should Be Equal    ${actual_cell_no}    ${expected_cell_no}
     ${actual_name}   Get Text    xpath=//div[contains(@class,'start') and text()='${time}']/ancestor::div[contains(@data-bind,'borderRightColor')]//div[@class='patient']//div[@class='name']/span
@@ -68,5 +68,5 @@ Validate Booking Timeslot Is Not Created
     [Documentation]    Validates that a booking timeslot has not been created by confirming
     ...     that the timeslot is not visible on the dashboard.”
     [Arguments]    ${time}
-    ${element_status}    Is Element Visible    xpath=//div[@class='start'][text()='${time}']   timeout=${SHORT_WAIT}
-    Should Be Equal   ${element_status}  False
+    ${element_status}    Is Element Visible    xpath=//div[@class='start'][text()='${time}']
+    Should Not Be True   ${element_status}

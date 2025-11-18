@@ -2,6 +2,7 @@
 Documentation    This add edit page resource file has all the add and edit page related keywords.
 Resource    ../Common/super.resource
 
+
 *** Keywords ***
 Save Booking Form
     [Documentation]    Saves the Add/Edit Booking form.
@@ -20,12 +21,12 @@ Select Duplicate Debtor
 
 Enter Form Data
     [Documentation]    Enters data into the booking form fields based on the values provided in the dictionary.
-    [Arguments]    &{form_data}
+    [Arguments]    ${select_by}=label    &{form_data}
     FOR    ${field}    ${value}    IN    &{form_data}
-        ${locator}=    Get From Dictionary    ${BOOKING_FORM_LOCATORS}    ${field}
+        ${locator}    Get From Dictionary    ${BOOKING_FORM_LOCATORS}    ${field}
         Run Keyword If    '${value}' == ''    Continue For Loop
         Run Keyword If    '${field}'.startswith('select.')
-        ...    Select From Dropdown    ${locator}    ${value}
+        ...    Select Options By    ${locator}    ${select_by}   ${value}
         Run Keyword If    '${field}'.startswith('input.')
         ...    Fill Text    ${locator}    ${value}
     END

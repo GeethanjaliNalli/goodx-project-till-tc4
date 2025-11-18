@@ -52,9 +52,3 @@ Wait Until Element Is Invisible
     ...     using the provided timeout duration.
     [Arguments]    ${locator}    ${timeout}
     Wait For Elements State    ${locator}    hidden    timeout=${timeout}
-
-Select From Dropdown
-    [Documentation]    Selects an option from the dropdown using the label, value, or index.
-    [Arguments]    ${locator}    ${option}    ${select_by}=label
-    Wait Until Element Is Visible    ${locator}    timeout=10s
-    Select Options By    ${locator}    ${select_by}    ${option}
