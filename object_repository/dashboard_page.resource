@@ -1,11 +1,12 @@
 *** Settings ***
-Documentation       This file has all type of locators for dashboard Page
+Documentation       This file contains all types of locators for the Dashboard page.
 
 
 *** Variables ***
 # robocop: disable=section-variable-not-uppercase
 ${button.logout}    .logout
 ${link.diary}    [class="option AnyDiaryScreen selected"]
+${ATTENTION_ALERT}    xpath=//span[text()='Attention!']
 ${button.attention.cancel}    xpath=//button[text()='Cancel']
 ${button.attention.ok}     xpath=//button[text()='Ok']
 ${link}

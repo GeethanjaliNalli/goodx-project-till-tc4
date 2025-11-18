@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    This File has all the Test Casess related to the login page, dashboard page and booking page
+Documentation    This file contains all the test cases related to the Login page, Dashboard page and Booking page.
 Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
@@ -14,8 +14,8 @@ TC_01 Validate User Is Able To Login The Application With Valid Username And Pas
     Handle Attention Alert    dismiss
 
 TC_02 Validate User Is Able To Perform New Patient Booking
-    [Documentation]    Verifies that the user can successfully log in, access the Diary page,
-    ...  and perform a new patient booking.
+    [Documentation]    Verifies that the user can successfully log in, access the Diary page, 
+    ...    and perform a new patient booking.
     Select Menu In Navigation Wheel    DIARY
     Select Timeslot    ${BOOKING_INFO}[input.time]
     Create New Patient Booking   ${BOOKING_INFO}    ${DEBTOR_INFO}
@@ -24,8 +24,8 @@ TC_02 Validate User Is Able To Perform New Patient Booking
     Validate Booking Timeslot Is Created    ${BOOKING_INFO}[input.time]    ${EXPECTED_DATA}[cell_no]    ${EXPECTED_DATA}[debtor_name]
 
 TC_03 Validate User Is Unable To Perform New Patient Booking
-    [Documentation]    Verifies that the user can successfully log in, access the Diary page, 
-    ...  and not perform a new patient booking.
+    [Documentation]    Verifies that the user can successfully log in, access the Diary page,
+    ...    ...and is unable to perform a new patient booking.
     Select Menu In Navigation Wheel    DIARY
     Select Timeslot    ${BOOKING_INFO}[input.time]
     Create New Patient Booking   ${BOOKING_INFO}    ${DEBTOR_INFO}
@@ -34,8 +34,8 @@ TC_03 Validate User Is Unable To Perform New Patient Booking
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
 
 TC_04 Validate User Is Unable To Perform New Patient Booking Without Name
-    [Documentation]    Verifies that the user can successfully log in, access the Diary page, 
-    ...  and not able to perform a new patient booking without name.
+    [Documentation]    Verifies that the user can successfully log in, access the Diary page,
+    ...    ... and is not able to perform a new patient booking without entering a name.
     Select Menu In Navigation Wheel    DIARY
     Select Timeslot    ${BOOKING_INFO}[input.time]
     Create New Patient Booking   ${BOOKING_INFO}    ${DEBTOR_WITHOUT_NAME}

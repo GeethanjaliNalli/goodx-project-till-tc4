@@ -41,20 +41,20 @@ Handle Attention Alert
     END
 
 Wait Until Element Is Visible
-    [Documentation]    Waits until the specified element is visible on the page.
-    ...  Uses the provided timeout duration for waiting.
+    [Documentation]    Waits until the specified element becomes visible on the page,
+    ...     using the provided timeout duration.
     [Arguments]    ${locator}    ${timeout}
     Wait For Elements State    ${locator}    attached    timeout=${timeout}
     Wait For Elements State    ${locator}    visible    timeout=${timeout}
 
 Wait Until Element Is Invisible
-    [Documentation]    Waits until the specified element is no longer visible on the page.
-    ...  Uses the provided timeout duration for waiting.
+    [Documentation]    Waits until the specified element is no longer visible on the page,
+    ...     using the provided timeout duration.
     [Arguments]    ${locator}    ${timeout}
     Wait For Elements State    ${locator}    hidden    timeout=${timeout}
 
 Select From Dropdown
-    [Documentation]    Selects an option from dropdown using label, value, or index.
+    [Documentation]    Selects an option from the dropdown using the label, value, or index.
     [Arguments]    ${locator}    ${option}    ${select_by}=label
     Wait Until Element Is Visible    ${locator}    timeout=10s
     Select Options By    ${locator}    ${select_by}    ${option}

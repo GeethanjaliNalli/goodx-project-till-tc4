@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation       This file has all type of locators for add edit booking Page
+Documentation       This file contains all types of locators for the Add/Edit Booking page.
 
 
 *** Variables ***

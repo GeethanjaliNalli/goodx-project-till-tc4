@@ -1,7 +1,5 @@
 from datetime import date
 from dateutil.relativedelta import relativedelta
-from Browser import Browser
-from datetime import date, timedelta
 import time
 import random
 import openpyxl
@@ -47,49 +45,3 @@ class CustomLibrary(object):
         for keyword in ["UNIQUE", "Unique", "unique"]:
             testdata = str(testdata).replace(keyword, timestamp)
         return testdata
-    
-    def __init__(self):
-        self.browser = Browser()
-
-    def enter_data(self, fields: dict):
-        """
-        Fill form fields from a dictionary.
-        'fields' is a Robot dict that maps locator -> value OR locator -> {"select": "Option"}.
-        Example keys: "css=#name" or "${select.type}" variables resolved by Robot.
-        """
-        page = self.browser.get_current_page()
-
-        # Defensive: make sure we got a dict
-        if not isinstance(fields, dict):
-            raise ValueError("enter_data expects a dictionary. Got: %r" % (fields,))
-
-        for locator, value in fields.items():
-            # NOTE: Robot passes locator variable names already expanded to string values,
-            # so 'locator' should be the actual CSS/XPath string (or variable value pointing to it).
-            # Handle select vs fill
-            if isinstance(value, dict) and "select" in value:
-                option = value["select"]
-                # Playwright's select_options expects value(s) — here we attempt label; adapt if needed
-                try:
-                    page.select_options(locator, option)
-                except Exception:
-                    # fallback: try selecting by visible text via JS or clicking option - adapt if necessary
-                    page.select_options(locator, option)
-            else:
-                page.fill(locator, str(value))
-
-        return "Entered %d fields" % (len(fields),)
-            
-def get_variables():
-    today = date.today().strftime("%Y-%m-%d")
-    tomorrow = (date.today() + timedelta(days=1)).strftime("%Y-%m-%d")
-    return {
-        "BOOKING_DATA_01": {
-            "select.type": "Meeting",
-            "select.status": "Booked",
-            "input.date": today,
-            "input.time": "14:30",
-            "input.duration": 30,
-            "input.reason": "Need wheelchair support"
-        }
-    }
