@@ -13,7 +13,7 @@ Logout From The Application
     [Documentation]    Logs out from the application by clicking the logout button.
     ...  Ensures the user session ends and the application returns to the login page.
     Click Logout
-    Handle Attention Alert    accept
+    Handle Attention Alert    ${ACCEPT_ATTENTION_ALERT}
     Wait Until Element Is Visible    ${form.loginform}    ${SHORT_WAIT}
 
 Click Logout

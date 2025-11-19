@@ -6,21 +6,21 @@ Resource    ../common/super.resource
 &{BOOKING_INFO}
     ...    select.type=Consultation
     ...    select.status=Booked
-    ...    input.time=09:00
+    ...    input.time=09:15
     ...    input.duration=15
     ...    input.reason=Medical Support12
 
 &{DEBTOR_INFO}
-    ...    input.names=Alex
-    ...    input.debtor.surname=Carey
+    ...    input.names=QZ_TestUser
+    ...    input.debtor.surname=GoodX
     ...    input.cellphone=9987654321
     ...    select.idtype=RSA ID
-    ...    input.idnumber=9001015050086
+    ...    input.idnumber=9001015050088
     ...    input.medicalaid=HealthPlus
     ...    input.maoption=Gold
-    ...    input.manumber=HP123456
+    ...    input.manumber=HP123459
     ...    select.gender=Male
-    ...    input.initials=AC
+    ...    input.initials=GQ
     ...    select.title=MR
     
 &{DEBTOR_WITHOUT_NAME}
@@ -42,5 +42,5 @@ Resource    ../common/super.resource
     ...    input.reason=Need wheelchair support
 
 &{EXPECTED_DATA}
-    ...    debtor_name=MR Carey, AC, Alex
+    ...    debtor_name=MR GoodX, GQ, QZ_TestUser
     ...    cell_no=9987654321

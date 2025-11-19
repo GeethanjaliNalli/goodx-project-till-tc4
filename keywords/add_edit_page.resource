@@ -12,7 +12,7 @@ Save Booking Form
 Close Booking Form
     [Documentation]    Closes the Add/Edit Booking form.
     Click    ${button.close}
-    Handle Attention Alert    accept
+    Handle Attention Alert    ${ACCEPT_ATTENTION_ALERT}
     Wait Until Element Is Invisible    ${label.addeditbooking}    timeout=5s
 
 Select Duplicate Debtor
@@ -52,7 +52,7 @@ Validate Warning Alert Is Displayed
     Wait Until Element Is Visible    ${label.warning}    2s
     ${actual_text}    Get Text    ${label.warning.message}
     Should Contain    ${actual_text}    ${expected_text}
-    Click    ${button.warning}
+    Click    ${button.warning.ok}
 
 Create Patient Booking With Existing Debtor
     [Documentation]    Creates a patient booking using an existing debtor's information.
