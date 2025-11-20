@@ -48,7 +48,7 @@ Select Timeslot
     [Documentation]    Simulates a double-click action on a timeslot in the Dashboard page
     ...     to create a new booking.
     [Arguments]    ${time}
-    Sleep    3s
+    Wait Until    2s
     Scroll To Element    xpath=//div[@class='time'][text()='${time}']
     Click With Options    xpath=//div[@class='time'][text()='${time}']    left    clickCount=2    force=True
 
@@ -77,13 +77,3 @@ Validate Booking Timeslot Is Created For Existing Patient
     [Arguments]    ${time}
     ${element_status}    Is Element Visible    xpath=//div[contains(@class,'start') and text()='${time}']
     Should Be True   ${element_status}
-
-Validate and Select Booking Timeslot Is Created For Existing Patient
-    [Documentation]    Validates that a booking timeslot has been successfully created for an existing
-    ...     patient by confirming its visibility on the Dashboard after the booking process is completed,
-    ...     and then selects the created timeslot for further actions.
-    [Arguments]    ${time}
-    Wait Until Element Is Visible    locator=xpath=//div[contains(@class,'start') and text()='${time}']/ancestor::div[contains(@data-bind,'borderRightColor')]//span[@class='account-status none']   timeout=${SHORT_WAIT}
-    ${element_status}    Is Element Visible    xpath=//div[contains(@class,'start') and text()='${time}']
-    Should Be True   ${element_status}
-    Click    xpath=//div[contains(@class,'start') and text()='${time}']/ancestor::div[contains(@data-bind,'borderRightColor')]//span[@class='account-status none']
