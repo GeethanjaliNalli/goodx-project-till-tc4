@@ -1,0 +1,62 @@
+[
+  {
+    "test_case_name": "TC00002_NPB_ValidBooking",
+    "input.time": "09:30",
+    "input.duration": "30",
+    "input.reason": "Initial consultation",
+    "input.debtor.title": "MR",
+    "input.debtor.surname": "Smith",
+    "input.debtor.firstname": "Alex",
+    "input.debtor.initials": "AS",
+    "input.debtor.idnumber": "8001015009087",
+    "input.debtor.gender": "Male",
+    "input.debtor.cell": "0821234567",
+    "input.debtor.email": "alex.smith@email.com",
+    "expected_result": "Booking created"
+  },
+  {
+    "test_case_name": "TC00002_NPB_MissingRequiredField",
+    "input.time": "09:30",
+    "input.duration": "30",
+    "input.reason": "",
+    "input.debtor.title": "MR",
+    "input.debtor.surname": "Smith",
+    "input.debtor.firstname": "Alex",
+    "input.debtor.initials": "AS",
+    "input.debtor.idnumber": "8001015009087",
+    "input.debtor.gender": "Male",
+    "input.debtor.cell": "0821234567",
+    "input.debtor.email": "alex.smith@email.com",
+    "expected_result": "No booking created"
+  },
+  {
+    "test_case_name": "TC00002_NPB_CloseScreenWithoutSaving",
+    "input.time": "09:30",
+    "input.duration": "30",
+    "input.reason": "Initial consultation",
+    "input.debtor.title": "MR",
+    "input.debtor.surname": "Smith",
+    "input.debtor.firstname": "Alex",
+    "input.debtor.initials": "AS",
+    "input.debtor.idnumber": "8001015009087",
+    "input.debtor.gender": "Male",
+    "input.debtor.cell": "0821234567",
+    "input.debtor.email": "alex.smith@email.com",
+    "expected_result": "No booking created"
+  },
+  {
+    "test_case_name": "TC00002_NPB_InvalidIDNumber",
+    "input.time": "09:30",
+    "input.duration": "30",
+    "input.reason": "Initial consultation",
+    "input.debtor.title": "MR",
+    "input.debtor.surname": "Smith",
+    "input.debtor.firstname": "Alex",
+    "input.debtor.initials": "AS",
+    "input.debtor.idnumber": "12345",
+    "input.debtor.gender": "Male",
+    "input.debtor.cell": "0821234567",
+    "input.debtor.email": "alex.smith@email.com",
+    "expected_result": "No booking created"
+  }
+]
