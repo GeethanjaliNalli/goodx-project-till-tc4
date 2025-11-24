@@ -1,0 +1,8 @@
+test_case_name	Username	Password	About_Tab	Expected_Navigation_Status	Expected_Close_Status
+TC_02_Valid_Navigation_Company	alex.smith	Password123	Company Info	Success	About Section Closed
+TC_02_Valid_Navigation_Terms	alex.smith	Password123	Terms & Conditions	Success	About Section Closed
+TC_02_Valid_Navigation_Privacy	alex.smith	Password123	Privacy Policy	Success	About Section Closed
+TC_02_Valid_Navigation_Contact	alex.smith	Password123	Contact Us	Success	About Section Closed
+TC_02_Valid_Navigation_Version	alex.smith	Password123	Version Info	Success	About Section Closed
+TC_02_Invalid_Login	wrong.user	WrongPass	Company Info	Login Failed	-
+TC_02_Missing_Tab	alex.smith	Password123		Tab Not Found	-
