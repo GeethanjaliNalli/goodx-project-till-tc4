@@ -1,0 +1,35 @@
+[
+  {
+    "test_case_name": "TC_02 Verify Navigation In About Section With Valid Credentials",
+    "Username": "validUser01",
+    "Password": "ValidPass123",
+    "Tab_Company": "Company Info",
+    "Tab_Terms": "Terms & Conditions",
+    "Tab_Privacy": "Privacy Policy",
+    "Tab_Contact": "Contact Us",
+    "Tab_Version": "Version Info",
+    "Expected_Result": "User is able to navigate through all tabs in the About section and close the section successfully."
+  },
+  {
+    "test_case_name": "TC_02_Negative_Invalid_Login_About_Navigation",
+    "Username": "invalidUser",
+    "Password": "wrongPass",
+    "Tab_Company": "Company Info",
+    "Tab_Terms": "Terms & Conditions",
+    "Tab_Privacy": "Privacy Policy",
+    "Tab_Contact": "Contact Us",
+    "Tab_Version": "Version Info",
+    "Expected_Result": "Login failed. User cannot access About section."
+  },
+  {
+    "test_case_name": "TC_02_Negative_Missing_Tab_About_Navigation",
+    "Username": "validUser01",
+    "Password": "ValidPass123",
+    "Tab_Company": "",
+    "Tab_Terms": "Terms & Conditions",
+    "Tab_Privacy": "Privacy Policy",
+    "Tab_Contact": "Contact Us",
+    "Tab_Version": "Version Info",
+    "Expected_Result": "Company Info tab not found. Navigation incomplete."
+  }
+]
