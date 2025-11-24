@@ -1,0 +1,26 @@
+[
+  {
+    "test_case_name": "TC_02 Verify Navigation In About Section With Valid Credentials",
+    "Username": "validUser",
+    "Password": "validPass123",
+    "Expected_Navigation_Status": "Success",
+    "Expected_About_Tabs": "Company, Team, Careers, Contact",
+    "Expected_About_Closed": "True"
+  },
+  {
+    "test_case_name": "TC_02 Verify Navigation In About Section With Invalid Credentials",
+    "Username": "invalidUser",
+    "Password": "wrongPass",
+    "Expected_Navigation_Status": "Failure",
+    "Expected_About_Tabs": "",
+    "Expected_About_Closed": "False"
+  },
+  {
+    "test_case_name": "TC_02 Verify Navigation In About Section With Empty Credentials",
+    "Username": "",
+    "Password": "",
+    "Expected_Navigation_Status": "Failure",
+    "Expected_About_Tabs": "",
+    "Expected_About_Closed": "False"
+  }
+]
