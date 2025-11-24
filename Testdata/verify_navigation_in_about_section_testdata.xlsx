@@ -1,0 +1,26 @@
+[
+  {
+    "test_case_name": "TC_02 Verify Navigation in About Section with Valid User",
+    "Username": "valid_user",
+    "Password": "valid_password",
+    "Expected_Navigation_Result": "Success"
+  },
+  {
+    "test_case_name": "TC_02 Verify Navigation in About Section with Invalid User",
+    "Username": "invalid_user",
+    "Password": "wrong_password",
+    "Expected_Navigation_Result": "Failure"
+  },
+  {
+    "test_case_name": "TC_02 Verify Navigation in About Section with Empty Username",
+    "Username": "",
+    "Password": "valid_password",
+    "Expected_Navigation_Result": "Failure"
+  },
+  {
+    "test_case_name": "TC_02 Verify Navigation in About Section with Empty Password",
+    "Username": "valid_user",
+    "Password": "",
+    "Expected_Navigation_Result": "Failure"
+  }
+]
