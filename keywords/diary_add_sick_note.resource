@@ -4,7 +4,6 @@ Resource    ../common/super.resource
 Resource    ../object_repository/diary_add_sick_note_page.resource
 
 *** Keywords ***
-
 Open Sick Note Form
     [Documentation]    Opens the Sick Note (Medical Certificate) form for the selected patient from the Diary.
     Click    ${DIARY_ADD_SICK_NOTE_LOCATORS.button.add_sick_note}
