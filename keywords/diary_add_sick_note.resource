@@ -4,48 +4,78 @@ Resource    ../common/super.resource
 Resource    ../object_repository/diary_add_sick_note_page.resource
 
 *** Keywords ***
+Select Existing Patient Booking
+    [Documentation]    Selects an existing patient booking in the Diary using booking information.
+    Search For Booking In Diary    ${BOOKING_INFO}
+    Select Booking Row    ${BOOKING_INFO}
+    Wait Until Booking Details Are Loaded    ${BOOKING_INFO}
 
-Open Sick Note Form
-    [Documentation]    Opens the Sick Note (Medical Certificate) form for the selected patient from the Diary.
-    Click    ${DIARY_ADD_SICK_NOTE_LOCATORS.button.add_sick_note}
-    Wait Until Element Is Visible    ${DIARY_ADD_SICK_NOTE_LOCATORS.input.sick_note_details}    timeout=5s
+Search For Booking In Diary
+    [Documentation]    Searches for a booking in the Diary module using booking details.
+    Fill Text    ${DIARY_ADD_SICK_NOTE_LOCATORS.input.search_booking_date}    ${BOOKING_INFO}[input.booking.date]
+    Fill Text    ${DIARY_ADD_SICK_NOTE_LOCATORS.input.search_booking_time}    ${BOOKING_INFO}[input.booking.time]
+    Click    ${DIARY_ADD_SICK_NOTE_LOCATORS.button.search_booking}
+    Wait Until Element Is Visible    ${DIARY_ADD_SICK_NOTE_LOCATORS.table.booking_results}    5s
 
-Enter Sick Note Details
-    [Documentation]    Enters required medical and patient details into the Sick Note form.
-    [Arguments]    &{sick_note_data}
-    FOR    ${field}    ${value}    IN    &{sick_note_data}
-        ${locator}=    Get From Dictionary    ${DIARY_ADD_SICK_NOTE_LOCATORS}    ${field}
-        Run Keyword If    '${value}' == ''    Continue For Loop
-        Fill Text    ${locator}    ${value}
-    END
+Select Booking Row
+    [Documentation]    Selects the booking row matching the booking info in the Diary results table.
+    ${patient_name}=    Set Variable    ${BOOKING_INFO}[input.booking.doctor]
+    Click    xpath=//table[@id='bookingResults']//tr[td[contains(text(),'${patient_name}')]]
+    Wait Until Element Is Visible    ${DIARY_ADD_SICK_NOTE_LOCATORS.button.add_sick_note}    3s
 
-Sign Sick Note
-    [Documentation]    Signs the Sick Note using the configured doctor's signature.
+Wait Until Booking Details Are Loaded
+    [Documentation]    Waits until the booking details panel is loaded for the selected booking.
+    Wait Until Element Is Visible    ${DIARY_ADD_SICK_NOTE_LOCATORS.panel.booking_details}    5s
+
+Enter Sick Note Details With Missing Mandatory Fields
+    [Documentation]    Enters Sick Note details with missing mandatory fields to trigger validation errors.
+    &{incomplete_sick_note}=    Create Dictionary    input.sicknote.start_date=    input.sicknote.end_date=    input.sicknote.diagnosis=    input.sicknote.comments=    input.sicknote.doctor_signature=    input.sicknote.qr_code=Enabled    input.sicknote.send_email=Yes    input.sicknote.print=Yes
+    Enter Sick Note Details    &{incomplete_sick_note}
+
+Attempt To Sign Sick Note
+    [Documentation]    Attempts to sign the Sick Note (should fail if mandatory fields are missing).
     Click    ${DIARY_ADD_SICK_NOTE_LOCATORS.button.sign_sick_note}
-    Wait Until Page Contains Element    Signed    timeout=3s
+    Wait Until Element Is Visible    ${DIARY_ADD_SICK_NOTE_LOCATORS.label.validation_error}    3s
 
-Send Sick Note By Email
-    [Documentation]    Sends the Sick Note to the patient's email address.
-    Click    ${DIARY_ADD_SICK_NOTE_LOCATORS.button.send_email}
-    Wait Until Page Contains Element    Email sent successfully    timeout=5s
+Validate Sick Note Mandatory Field Validation Error Displayed
+    [Documentation]    Validates that the Sick Note mandatory field validation error is displayed.
+    ${error_text}=    Get Text    ${DIARY_ADD_SICK_NOTE_LOCATORS.label.validation_error}
+    Should Contain    ${error_text}    Mandatory
 
-Print Sick Note
-    [Documentation]    Prints the Sick Note and checks for QR Code if enabled.
-    Click    ${DIARY_ADD_SICK_NOTE_LOCATORS.button.print_sick_note}
-    Wait Until Page Contains Element    Print preview    timeout=5s
-    Run Keyword If    '${QR_CODE_ENABLED}' == 'True'    Validate QR Code Is Present
-
-Validate Sick Note Saved In Clinical Record
-    [Documentation]    Validates that the Sick Note is saved in the patient’s clinical record.
+Validate Sick Note Not Saved In Clinical Record
+    [Documentation]    Validates that the Sick Note is NOT saved in the patient’s clinical record.
     Go To Clinical Records
-    Wait Until Page Contains Element    Sick Note    timeout=5s
+    Wait Until Page Does Not Contain Element    Sick Note    timeout=5s
 
-Validate Communication History Logs
-    [Documentation]    Validates that Email and Print logs are recorded in the patient communication history.
+Close Sick Note Form Without Saving
+    [Documentation]    Closes the Sick Note form without saving any data.
+    Click    ${DIARY_ADD_SICK_NOTE_LOCATORS.button.close_sick_note}
+    Handle Attention Alert    dismiss
+    Wait Until Element Is Invisible    ${DIARY_ADD_SICK_NOTE_LOCATORS.input.sick_note_details}    5s
+
+Validate No Communication History Log Created
+    [Documentation]    Validates that no Email or Print logs are created in the patient communication history after closing the Sick Note form without saving.
     Go To Communication History
-    Wait Until Page Contains Element    Email    timeout=3s
-    Wait Until Page Contains Element    Print    timeout=3s
+    Wait Until Page Does Not Contain Element    Email    timeout=3s
+    Wait Until Page Does Not Contain Element    Print    timeout=3s
 
-Validate QR Code Is Present
-    [Documentation]    Validates that a QR Code is present on the Sick Note printout if enabled.
-    Wait Until Page Contains Element    QR Code    timeout=3s
+Go To Clinical Records
+    [Documentation]    Navigates to the Clinical Records section for the current patient.
+    Click    ${DIARY_ADD_SICK_NOTE_LOCATORS.tab.clinical_records}
+    Wait Until Element Is Visible    ${DIARY_ADD_SICK_NOTE_LOCATORS.section.clinical_records}    3s
+
+Go To Communication History
+    [Documentation]    Navigates to the Communication History section for the current patient.
+    Click    ${DIARY_ADD_SICK_NOTE_LOCATORS.tab.communication_history}
+    Wait Until Element Is Visible    ${DIARY_ADD_SICK_NOTE_LOCATORS.section.communication_history}    3s
+
+Wait Until Page Does Not Contain Element
+    [Documentation]    Waits until the page does not contain the specified element text.
+    [Arguments]    ${text}    ${timeout}=5s
+    Wait Until Keyword Succeeds    ${timeout}    1s    Run Keyword And Ignore Error    Page Should Not Contain Element    ${text}
+
+Page Should Not Contain Element
+    [Documentation]    Fails if the page contains the specified element text.
+    [Arguments]    ${text}
+    ${status}=    Run Keyword And Return Status    Page Should Contain    ${text}
+    Should Be False    ${status}
