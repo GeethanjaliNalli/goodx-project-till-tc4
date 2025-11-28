@@ -1,9 +1,8 @@
 *** Settings ***
-Documentation    This file contains all the test cases related to the Login page, Dashboard page and Booking page.
+Documentation    This file contains all the test cases related to the Login page, Dashboard page, Booking page, and Quicknote functionality.
 Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
-
 
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
@@ -70,3 +69,20 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC_08 Validate User Is Able To Add Quicknote To Booking
+    [Documentation]    Verifies that the user can add a quicknote (with text, image, and PDF) to a booking for a new patient not yet in the debtor list, and that the quicknote can be printed with all attachments.
+    # Step 1: Navigate to Diary module
+    Select Menu In Navigation Wheel    ${DIARY_MODULE}
+    # Step 2: Select timeslot and create a booking for a new patient
+    Select Timeslot    ${NEW_PATIENT_BOOKING}[input.booking_time]
+    Create New Patient Booking    ${NEW_PATIENT_BOOKING}    ${NEW_PATIENT_BOOKING}
+    Select Duplicate Debtor
+    Save Booking Form
+    Validate Booking Timeslot Is Created    ${NEW_PATIENT_BOOKING}[input.booking_time]    ${NEW_PATIENT_BOOKING}[input.patient_cell]    ${NEW_PATIENT_BOOKING}[input.patient_firstname]
+    # Step 3: Open the booking and add quicknote
+    Open Booking Details    ${NEW_PATIENT_BOOKING}[input.booking_time]
+    Add Quicknote To Booking    ${QUICKNOTE_INFO}
+    Save Quicknote
+    # Step 4: Validate quicknote is saved and printable with all attachments
+    Validate Quicknote Is Saved And Printable    ${EXPECTED_QUICKNOTE_RESULT}
