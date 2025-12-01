@@ -1,9 +1,8 @@
 *** Settings ***
-Documentation    This file contains all the test cases related to the Login page, Dashboard page and Booking page.
+Documentation    This file contains all the test cases related to the Login page, Dashboard page, Booking page, and Diary - Add Sick note functionality.
 Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
-
 
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
@@ -70,3 +69,23 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC_08 Diary - Add Sick note
+    [Documentation]    Verifies that a practitioner can create, populate, sign, and send/print a Sick Note (Medical Certificate) for a selected patient with accurate details and no validation errors.
+    Select Menu In Navigation Wheel    ${DIARY_MODULE}
+    Select Existing Booking For Patient    ${SICK_NOTE_BOOKING_INFO}[booking.date]    ${SICK_NOTE_BOOKING_INFO}[booking.time]    ${SICK_NOTE_PATIENT_INFO}[patient.first_name]    ${SICK_NOTE_PATIENT_INFO}[patient.surname]
+    Open Clinical Forms Tab For Booking
+    Click Add Sick Note Button
+    Populate Sick Note Patient Details    &{SICK_NOTE_PATIENT_INFO}
+    Populate Sick Note Booking Details    &{SICK_NOTE_BOOKING_INFO}
+    Populate Sick Note Details    &{SICK_NOTE_DETAILS}
+    Save Sick Note Form
+    Sign Sick Note Electronically    ${SICK_NOTE_DETAILS}[sick_note.doctor_signature]
+    Send Sick Note Via Email    ${SICK_NOTE_DETAILS}[sick_note.doctor_email]
+    Print Sick Note
+    Validate Sick Note Created    &{SICK_NOTE_EXPECTED_DATA}
+    Validate Sick Note Saved In Clinical Record    ${SICK_NOTE_EXPECTED_DATA}[expected.saved_in_clinical_record]
+    Validate Sick Note Email Log Recorded    ${SICK_NOTE_EXPECTED_DATA}[expected.sent_email]
+    Validate Sick Note Print Log Recorded    ${SICK_NOTE_EXPECTED_DATA}[expected.printed]
+    Validate QR Code Present On Sick Note Printout    ${SICK_NOTE_EXPECTED_DATA}[expected.qr_code_present]
+    Validate No Validation Errors In Sick Note    ${SICK_NOTE_EXPECTED_DATA}[expected.validation_errors]
