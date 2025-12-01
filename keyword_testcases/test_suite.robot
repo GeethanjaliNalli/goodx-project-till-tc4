@@ -1,9 +1,8 @@
 *** Settings ***
-Documentation    This file contains all the test cases related to the Login page, Dashboard page and Booking page.
+Documentation    This file contains all the test cases related to the Login page, Dashboard page, Booking page, and Adding a Quicknote functionality.
 Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
-
 
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
@@ -70,3 +69,16 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC_08 Validate User Is Able To Add Quicknote To Booking
+    [Documentation]    Verifies that the user can add a quicknote (text, image, PDF) to a booking and that the quicknote is rendered correctly.
+    # Step 1: Navigate to Diary module and select an existing booking (with new patient)
+    Select Menu In Navigation Wheel    ${DIARY_MODULE}
+    Select Existing Booking With New Patient
+    # Step 2: Open Quicknote functionality
+    Open Quicknote Section For Booking
+    # Step 3: Enter quicknote text, upload image and PDF, and save
+    Add Quicknote Details    &{QUICKNOTE_DATA}
+    Save Quicknote
+    # Step 4: Validate quicknote is auto completed and rendered with all attachments
+    Validate Quicknote Rendered With Details    &{QUICKNOTE_DATA}
