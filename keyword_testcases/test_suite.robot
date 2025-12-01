@@ -1,9 +1,8 @@
 *** Settings ***
-Documentation    This file contains all the test cases related to the Login page, Dashboard page and Booking page.
+Documentation    This file contains all the test cases related to the Login page, Dashboard page, Booking page, and Diary - Add Sick note.
 Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
-
 
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
@@ -70,3 +69,26 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC_08 Validate User Is Able To Add Sick Note (Medical Certificate) For Patient
+    [Documentation]    Verifies that a practitioner can create and save a Sick Note (Medical Certificate) for a selected patient from the Diary, and that all related logs and QR code (if enabled) are recorded appropriately.
+    # Navigate to Diary module
+    Select Menu In Navigation Wheel    ${DIARY_MODULE}
+    # Select the patient booking/timeslot
+    Select Timeslot    ${SICK_NOTE_INFO}[input.booking_time]
+    # Open Clinical Forms for the selected booking
+    Open Clinical Forms For Booking
+    # Select 'Sick Note' (Medical Certificate) form
+    Select Clinical Form    Sick Note
+    # Fill Sick Note form fields with test data
+    Fill Sick Note Form    &{SICK_NOTE_INFO}
+    # Save the Sick Note
+    Save Clinical Form
+    # Validate Sick Note is saved in Patient's Clinical record
+    Validate Clinical Record Entry    ${SICK_NOTE_INFO}[input.patient_name]    ${SICK_NOTE_INFO}[input.booking_date]    ${SICK_NOTE_INFO}[input.reason]
+    # Validate Email log is recorded in Patient communication history
+    Validate Communication Log Entry    ${SICK_NOTE_INFO}[input.patient_name]    Email    ${SICK_NOTE_INFO}[input.doctor_email]
+    # Validate Print log is recorded in Patient communication history
+    Validate Communication Log Entry    ${SICK_NOTE_INFO}[input.patient_name]    Print    ${SICK_NOTE_INFO}[input.doctor_name]
+    # Validate QR Code appears on printout if enabled
+    Validate QR Code On Printout    ${SICK_NOTE_INFO}[select.include_qr_code]
