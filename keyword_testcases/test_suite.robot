@@ -1,9 +1,8 @@
 *** Settings ***
-Documentation    This file contains all the test cases related to the Login page, Dashboard page and Booking page.
+Documentation    This file contains all the test cases related to the Login page, Dashboard page, Booking page, and Diary - Add Sick note functionality.
 Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
-
 
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
@@ -70,3 +69,23 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC_08 Diary - Add Sick note
+    [Documentation]    Create and verify a Sick Note (Medical Certificate) for a selected Patient. Ensures the Sick Note is saved in the Patient’s Clinical record, Email and Print logs are recorded in the Patient communication history, and QR Code (if enabled) appears on printout for validation.
+    Select Menu In Navigation Wheel    ${DIARY_MODULE}
+    Select Patient Booking In Diary    ${SICK_NOTE_INFO}[input.patient_name]    ${SICK_NOTE_INFO}[input.booking_date]    ${SICK_NOTE_INFO}[input.booking_time]
+    Open Clinical Forms For Booking
+    Select Sick Note Form
+    Enter Sick Note Patient Details    ${SICK_NOTE_INFO}[input.patient_name]    ${SICK_NOTE_INFO}[input.patient_id]
+    Enter Sick Note Dates    ${SICK_NOTE_INFO}[input.sick_note_date]    ${SICK_NOTE_INFO}[input.sick_note_from]    ${SICK_NOTE_INFO}[input.sick_note_to]
+    Enter Sick Note Reason    ${SICK_NOTE_INFO}[input.reason]
+    Enter Sick Note Additional Notes    ${SICK_NOTE_INFO}[input.notes]
+    Attach Doctor Signature    ${SICK_NOTE_INFO}[input.doctor_signature]
+    Enter Doctor Email    ${SICK_NOTE_INFO}[input.doctor_email]
+    Enable QR Code On Sick Note    ${SICK_NOTE_INFO}[input.qr_code_enabled]
+    Save Sick Note Form
+    Validate Sick Note Saved In Clinical Record    ${SICK_NOTE_INFO}[input.patient_name]    ${EXPECTED_SICK_NOTE_DATA}[saved_in_clinical_record]
+    Validate Sick Note Email Log Recorded    ${EXPECTED_SICK_NOTE_DATA}[email_log_recorded]
+    Validate Sick Note Print Log Recorded    ${EXPECTED_SICK_NOTE_DATA}[print_log_recorded]
+    Validate QR Code On Sick Note Printout    ${EXPECTED_SICK_NOTE_DATA}[qr_code_on_printout]
+    Validate Sick Note Communication History Updated    ${EXPECTED_SICK_NOTE_DATA}[communication_history_updated]
