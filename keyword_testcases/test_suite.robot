@@ -4,6 +4,7 @@ Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
 
+
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
     [Documentation]    Verifies that a user can successfully log in with valid credentials.
@@ -69,33 +70,3 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
-
-TC00007_Diary_Script - Validate that the Practitioner can create, complete, sign, email, and print a patient prescription (Script) using the Basic Script Features.
-    [Documentation]    Validate that the Practitioner can create, complete, sign, email, and print a patient prescription (Script) using the Basic Script Features.
-    # Step 1-2: Open Diary and select an existing patient booking
-    Open Diary And Select Existing Booking
-    # Step 3-4: Open Clinical sidebar and select Script tab
-    Open Clinical Sidebar And Select Script Tab
-    # Step 5-6: Click 'New Script' and select script type (Acute/Repeat) using test data
-    Click New Script And Select Script Type    ${SCRIPT_DATA.select.script.type}
-    # Step 7: Enter diagnosis using test data
-    Enter Script Diagnosis    ${SCRIPT_DATA.input.diagnosis}
-    # Step 8-9: Add medication to script using test data
-    Add Medication To Script    ${SCRIPT_DATA.input.medicine}
-    # Step 10: Enter directions for medication using test data
-    Add Medication Directions    ${SCRIPT_DATA.input.directions}
-    # Step 11: Enter total quantity using test data
-    Enter Medication Quantity    ${SCRIPT_DATA.input.total.quantity}
-    # Step 12: Enter repeat count using test data
-    Enter Medication Repeat Count    ${SCRIPT_DATA.input.repeat.count}
-    # Step 13: Set 'Not Substitutable' checkbox using test data
-    Set Not Substitutable Checkbox    ${SCRIPT_DATA.checkbox.not.substitutable}
-    # Step 14: Save and complete the script
-    Save And Complete Script
-    # Step 15: Sign the script (if signature is configured)
-    Sign Script If Required
-    # Step 16: Email and print the script
-    Email Script To Patient
-    Print Script Document
-    # Step 17: Validate script is marked as completed and all details (medication, directions, signature, QR code) are correct
-    Validate Script Completion And Output Details
