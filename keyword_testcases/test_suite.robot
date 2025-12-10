@@ -4,7 +4,6 @@ Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
 
-
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
     [Documentation]    Verifies that a user can successfully log in with valid credentials.
@@ -70,3 +69,18 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC00005_Diary_Add Quicknote - Adding a quicknote
+    [Documentation]    Adding a quick note to a booking. Quick Note is successfully created and contains the image, text, and PDF added.
+    # Step 1-2: Open Diary and open clinical sidebar for a booking with a new patient (not added to debtor list yet)
+    Open Diary And Open Clinical Sidebar For New Patient Booking
+    # Step 3-4: Select Quick Note form
+    Select Quick Note Form    ${select.formsLibrary}
+    # Step 5-9: Add image to quick note
+    Add Image To Quick Note    ${quicknote.addImageButton}    ${quicknote.imageUploadInput}    ${QUICK_NOTE_DATA.file.image.path}
+    # Step 10: Add text to quick note
+    Add Text To Quick Note    ${quicknote.textArea}    ${QUICK_NOTE_DATA.input.quicknote.text}
+    # Step 11-12: Upload PDF to quick note
+    Upload PDF To Quick Note    ${quicknote.addPdfButton}    ${quicknote.pdfUploadInput}    ${QUICK_NOTE_DATA.file.pdf.path}
+    # Step 13: Print quick note
+    Print Quick Note    ${quicknote.printButton}
