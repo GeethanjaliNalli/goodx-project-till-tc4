@@ -4,7 +4,6 @@ Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
 
-
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
     [Documentation]    Verifies that a user can successfully log in with valid credentials.
@@ -70,3 +69,30 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC00006_Diary_Add Sick note - Diary - Add Sick note
+    [Documentation]    Create and verify a Sick Note (Medical Certificate) for a selected Patient. Sick Note is saved in the Patient’s Clinical record. Email and Print logs are recorded in the Patient communication history. QR Code (if enabled) appears on printout for validation.
+    # Step 1-2: Open Diary module and select an existing patient booking
+    Open Diary And Select Existing Patient Booking    ${SICK_NOTE_DATA}
+    # Step 3-4: Open Clinical Sidebar for the selected patient
+    Open Clinical Sidebar For Selected Patient
+    # Step 5-6: Select 'Forms Library' and choose 'SICK NOTE' form
+    Select Forms Library And Choose Sick Note Form    ${SICK_NOTE_DATA}[select.form_type]
+    # Step 7-9: Fill Sick Note details (date, unfit for work, reason)
+    Fill Sick Note Details    ${SICK_NOTE_DATA}[input.sick_note_date]    ${SICK_NOTE_DATA}[input.unfit_for_work]    ${SICK_NOTE_DATA}[reason]
+    # Step 10: Add Doctor’s signature
+    Add Doctor Signature To Sick Note    ${SICK_NOTE_DATA}[doctor_signature]
+    # Step 11: Save Sick Note
+    Save Sick Note Form
+    # Step 12: Email Sick Note to patient
+    Email Sick Note To Patient    ${SICK_NOTE_DATA}[email_to]
+    # Step 13: Print Sick Note
+    Print Sick Note    ${SICK_NOTE_DATA}[print_option]
+    # Step 14: Verify QR Code is present on printout if enabled
+    Verify QR Code On Sick Note Printout    ${SICK_NOTE_DATA}[qr_code_enabled]
+    # Step 15: Verify Sick Note saved in Patient’s Clinical record
+    Verify Sick Note Saved In Clinical Record
+    # Step 16: Verify Email log in Patient communication history
+    Verify Sick Note Email Log In Communication History    ${SICK_NOTE_DATA}[email_to]
+    # Step 17: Verify Print log in Patient communication history
+    Verify Sick Note Print Log In Communication History
