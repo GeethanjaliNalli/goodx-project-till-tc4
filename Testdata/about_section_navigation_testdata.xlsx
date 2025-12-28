@@ -1,0 +1,30 @@
+[
+  {
+    "test_case_name": "TC_AboutSection_ValidNavigation",
+    "Username": "alex.smith",
+    "Password": "Password123",
+    "Expected_Navigation_Status": "Success",
+    "Expected_Message": "All About section tabs navigated and closed successfully"
+  },
+  {
+    "test_case_name": "TC_AboutSection_InvalidPassword",
+    "Username": "alex.smith",
+    "Password": "WrongPass",
+    "Expected_Navigation_Status": "Failure",
+    "Expected_Message": "Invalid username or password"
+  },
+  {
+    "test_case_name": "TC_AboutSection_EmptyUsername",
+    "Username": "",
+    "Password": "Password123",
+    "Expected_Navigation_Status": "Failure",
+    "Expected_Message": "Username is required"
+  },
+  {
+    "test_case_name": "TC_AboutSection_EmptyPassword",
+    "Username": "alex.smith",
+    "Password": "",
+    "Expected_Navigation_Status": "Failure",
+    "Expected_Message": "Password is required"
+  }
+]
