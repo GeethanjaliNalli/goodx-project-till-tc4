@@ -4,7 +4,6 @@ Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
 
-
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
     [Documentation]    Verifies that a user can successfully log in with valid credentials.
@@ -70,3 +69,26 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC00002 - Verify Navigation in the About section
+    [Documentation]    Login and navigate to each tab in 'About' Module. User is able to navigate through all tabs in the About section and close it successfully.
+    # Step 1: Open the About section from the main navigation or menu
+    Open About Section
+    # Step 2: Navigate to the Overview tab in About section
+    Navigate To About Tab    ${ABOUT_OVERVIEW_TAB}
+    # Step 3: Navigate to the Company Info tab in About section
+    Navigate To About Tab    ${ABOUT_COMPANY_INFO_TAB}
+    # Step 4: Navigate to the Licenses tab in About section
+    Navigate To About Tab    ${ABOUT_LICENSES_TAB}
+    # Step 5: Navigate to the Terms of Service tab in About section
+    Navigate To About Tab    ${ABOUT_TERMS_TAB}
+    # Step 6: Navigate to the Privacy Policy tab in About section
+    Navigate To About Tab    ${ABOUT_PRIVACY_TAB}
+    # Step 7: Navigate to the Support tab in About section
+    Navigate To About Tab    ${ABOUT_SUPPORT_TAB}
+    # Step 8: Navigate to the Credits tab in About section
+    Navigate To About Tab    ${ABOUT_CREDITS_TAB}
+    # Step 9: Navigate to the Version Info tab in About section
+    Navigate To About Tab    ${ABOUT_VERSION_TAB}
+    # Step 10: Close the About section
+    Close About Section
