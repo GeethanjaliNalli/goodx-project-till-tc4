@@ -16,3 +16,4 @@ Resource            ../object_repository/dashboard_page.resource
 Resource            ../object_repository/add_edit_page.resource
 Resource            ../Testdata/booking_data.resource
 Resource            ../Testdata/constants.resource
+# auto-update: 2025-12-10T06:55:32.362Z
