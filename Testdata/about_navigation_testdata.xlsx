@@ -1,0 +1,35 @@
+[
+  {
+    "test_case_name": "TC_02_About_Valid_Login_Navigate_All_Tabs",
+    "Username": "alex.user",
+    "Password": "Passw0rd123",
+    "Tab1": "About Company",
+    "Tab2": "Team",
+    "Tab3": "Careers",
+    "Tab4": "Contact Us",
+    "Tab5": "Legal",
+    "Expected_Result": "User should be able to log in and navigate through all the tabs in the About section successfully, and close the section."
+  },
+  {
+    "test_case_name": "TC_02_About_Invalid_Login",
+    "Username": "alex.user",
+    "Password": "wrongpass",
+    "Tab1": "About Company",
+    "Tab2": "Team",
+    "Tab3": "Careers",
+    "Tab4": "Contact Us",
+    "Tab5": "Legal",
+    "Expected_Result": "Login failed. User should not be able to access About section."
+  },
+  {
+    "test_case_name": "TC_02_About_Valid_Login_Missing_Tab",
+    "Username": "alex.user",
+    "Password": "Passw0rd123",
+    "Tab1": "About Company",
+    "Tab2": "Team",
+    "Tab3": "",
+    "Tab4": "Contact Us",
+    "Tab5": "Legal",
+    "Expected_Result": "User should be able to log in but navigation fails due to missing tab."
+  }
+]
