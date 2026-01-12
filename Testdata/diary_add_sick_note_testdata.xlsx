@@ -1,0 +1,54 @@
+[
+  {
+    "test_case_name": "TC06_Add_Sick_Note_Valid_Data",
+    "Patient_Firstname": "Alex",
+    "Patient_Surname": "Smith",
+    "Patient_ID": "9005151234567",
+    "Booking_Date": "2024-06-25",
+    "Booking_Time": "09:30",
+    "Doctor": "Dr. Carey",
+    "SickNote_Start": "2024-06-25",
+    "SickNote_End": "2024-06-27",
+    "SickNote_Reason": "Flu symptoms",
+    "Expected_Result": "Sick Note saved, Email and Print logs recorded, QR Code visible"
+  },
+  {
+    "test_case_name": "TC06_Add_Sick_Note_Missing_Reason",
+    "Patient_Firstname": "Alex",
+    "Patient_Surname": "Smith",
+    "Patient_ID": "9005151234567",
+    "Booking_Date": "2024-06-25",
+    "Booking_Time": "09:30",
+    "Doctor": "Dr. Carey",
+    "SickNote_Start": "2024-06-25",
+    "SickNote_End": "2024-06-27",
+    "SickNote_Reason": "",
+    "Expected_Result": "Error: Reason for sick note is required"
+  },
+  {
+    "test_case_name": "TC06_Add_Sick_Note_Invalid_Dates",
+    "Patient_Firstname": "Alex",
+    "Patient_Surname": "Smith",
+    "Patient_ID": "9005151234567",
+    "Booking_Date": "2024-06-25",
+    "Booking_Time": "09:30",
+    "Doctor": "Dr. Carey",
+    "SickNote_Start": "2024-06-28",
+    "SickNote_End": "2024-06-27",
+    "SickNote_Reason": "Migraine",
+    "Expected_Result": "Error: End date cannot be before start date"
+  },
+  {
+    "test_case_name": "TC06_Add_Sick_Note_Missing_Doctor",
+    "Patient_Firstname": "Alex",
+    "Patient_Surname": "Smith",
+    "Patient_ID": "9005151234567",
+    "Booking_Date": "2024-06-25",
+    "Booking_Time": "09:30",
+    "Doctor": "",
+    "SickNote_Start": "2024-06-25",
+    "SickNote_End": "2024-06-27",
+    "SickNote_Reason": "Flu symptoms",
+    "Expected_Result": "Error: Doctor selection is required"
+  }
+]
