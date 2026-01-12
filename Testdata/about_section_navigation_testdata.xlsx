@@ -1,0 +1,30 @@
+[
+  {
+    "test_case_name": "TC_About_Valid_Navigation",
+    "Username": "alex.smith",
+    "Password": "Password123",
+    "Expected_Navigation_Status": "Success",
+    "Expected_Close_Status": "True"
+  },
+  {
+    "test_case_name": "TC_About_Invalid_Password",
+    "Username": "alex.smith",
+    "Password": "WrongPass",
+    "Expected_Navigation_Status": "Failure",
+    "Expected_Close_Status": "False"
+  },
+  {
+    "test_case_name": "TC_About_Empty_Username",
+    "Username": "",
+    "Password": "Password123",
+    "Expected_Navigation_Status": "Failure",
+    "Expected_Close_Status": "False"
+  },
+  {
+    "test_case_name": "TC_About_Empty_Password",
+    "Username": "alex.smith",
+    "Password": "",
+    "Expected_Navigation_Status": "Failure",
+    "Expected_Close_Status": "False"
+  }
+]
