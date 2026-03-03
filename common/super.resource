@@ -1,18 +1,19 @@
 *** Settings ***
-Documentation       This super.resource file has all imported Libraries and Resources
-Library             Collections
-Library             DateTime
-Library             OperatingSystem
-Library             String
-Library             Browser        jsextension=${CURDIR}/../library/custom_library.js
-Library             ../library/CustomLibrary.py
-Resource            ../common/global_config.resource
-Resource            ../keywords/common_keywords.resource
-Resource            ../keywords/login_page.resource
-Resource            ../keywords/dashboard_page.resource
-Resource            ../keywords/add_edit_page.resource
-Resource            ../object_repository/login_page.resource
-Resource            ../object_repository/dashboard_page.resource
-Resource            ../object_repository/add_edit_page.resource
-Resource            ../Testdata/booking_data.resource
-Resource            ../Testdata/constants.resource
+Resource    ../keywords/add_edit_page.resource
+Resource    ../keywords/common_keywords.resource
+Resource    ../keywords/dashboard_page.resource
+Resource    ../keywords/login_page.resource
+Resource    ../object_repository/add_edit_page.resource
+Resource    ../object_repository/dashboard_page.resource
+Resource    ../object_repository/login_page.resource
+Resource    ../Testdata/booking_data.resource
+Resource    ../Testdata/constants.resource
+
+# --- NEW KEYWORD FILE IMPORT ---
+Resource    ../../keywords/quick_note_page.resource
+
+# --- NEW LOCATOR FILE IMPORT ---
+Resource    ../../object_repository/quick_note_page.resource
+
+# --- NEW TEST DATA FILE IMPORT ---
+Resource    ../../Testdata/quick_note_data.resource
