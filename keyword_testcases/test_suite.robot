@@ -4,7 +4,6 @@ Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
 
-
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
     [Documentation]    Verifies that a user can successfully log in with valid credentials.
@@ -70,3 +69,27 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC_08 Diary - Add Sick note
+    [Documentation]    Verifies that a practitioner can create, sign, and send/print a Sick Note (Medical Certificate) for a selected patient from the Diary, and that all expected records and logs are created without data loss or validation errors.
+    Select Menu In Navigation Wheel    ${DIARY_MODULE}
+    Select Timeslot    ${SICK_NOTE_BOOKING_INFO}[input.time]
+    Open Clinical Forms For Patient    ${SICK_NOTE_PATIENT_INFO}
+    Select Sick Note Form
+    Fill Sick Note Patient Details    ${SICK_NOTE_PATIENT_INFO}
+    Fill Sick Note Doctor Details    ${SICK_NOTE_DOCTOR_INFO}
+    Fill Sick Note Details    ${SICK_NOTE_DETAILS}
+    Sign Sick Note    ${SICK_NOTE_DOCTOR_INFO}[input.signature]
+    Save Sick Note Form
+    IF    ${SICK_NOTE_DETAILS}[select.send_email] == True
+        Send Sick Note Via Email    ${SICK_NOTE_PATIENT_INFO}[email]
+    END
+    IF    ${SICK_NOTE_DETAILS}[select.print] == True
+        Print Sick Note
+    END
+    IF    ${SICK_NOTE_DETAILS}[select.qr_code_enabled] == True
+        Validate QR Code Is Present On Sick Note
+    END
+    Validate Sick Note Saved In Clinical Record    ${SICK_NOTE_EXPECTED_RESULTS}
+    Validate Email And Print Logs Recorded    ${SICK_NOTE_EXPECTED_RESULTS}
+    Validate No Validation Errors In Sick Note    ${SICK_NOTE_EXPECTED_RESULTS}
