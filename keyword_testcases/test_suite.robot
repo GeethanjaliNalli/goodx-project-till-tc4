@@ -1,9 +1,8 @@
 *** Settings ***
-Documentation    This file contains all the test cases related to the Login page, Dashboard page and Booking page.
+Documentation    This file contains all the test cases related to the Login page, Dashboard page, Booking page, and Diary - Add Sick note functionality.
 Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
-
 
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
@@ -70,3 +69,26 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC_08 Diary - Add Sick note
+    [Documentation]    Verifies that a practitioner can create, populate, sign, and send/print a Sick Note (Medical Certificate) for a selected patient, ensuring all data is correctly saved and communication logs are updated.
+    Select Menu In Navigation Wheel    ${DIARY_MODULE}
+    Select Timeslot    ${SICK_NOTE_BOOKING_INFO}[input.time]
+    Open Patient Clinical Forms    ${SICK_NOTE_PATIENT_INFO}[input.patient_name]
+    Select Sick Note Form
+    Populate Sick Note Details    &{SICK_NOTE_PATIENT_INFO}    &{SICK_NOTE_BOOKING_INFO}    &{SICK_NOTE_DETAILS}
+    Sign Sick Note    ${SICK_NOTE_DETAILS}[select.signature]    ${SICK_NOTE_DETAILS}[input.signature_date]
+    Save Sick Note Form
+    IF    '${SICK_NOTE_DETAILS}[input.send_email]' == 'True'
+        Send Sick Note Via Email    ${SICK_NOTE_DETAILS}[input.doctor_email]
+    END
+    IF    '${SICK_NOTE_DETAILS}[input.print_copy]' == 'True'
+        Print Sick Note Copy
+    END
+    Validate Sick Note Saved In Clinical Record    ${SICK_NOTE_PATIENT_INFO}[input.patient_name]
+    Validate Email Log Recorded    ${SICK_NOTE_DETAILS}[input.doctor_email]
+    Validate Print Log Recorded
+    IF    '${SICK_NOTE_DETAILS}[input.qr_code_enabled]' == 'True'
+        Validate QR Code Present On Printout
+    END
+    Validate No Validation Errors
