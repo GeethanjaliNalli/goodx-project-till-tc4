@@ -1,9 +1,8 @@
 *** Settings ***
-Documentation    This file contains all the test cases related to the Login page, Dashboard page and Booking page.
+Documentation    This file contains all the test cases related to the Login page, Dashboard page, Booking page, and Diary - Add Sick note functionality.
 Resource    ../common/super.resource
 Test Setup    Login To Application    ${USERNAME}    ${PASSWORD}
 Test Teardown    Logout From The Application
-
 
 *** Test Cases ***
 TC_01 Validate User Is Able To Login The Application With Valid Username And Password
@@ -70,3 +69,18 @@ TC_07 Validate User Is Unable To Create Booking Without Debtor/patient Details
     Validate Warning Alert Is Displayed    ${INVALID_FIELD_ERROR_MESSAGE}
     Close Booking Form
     Validate Booking Timeslot Is Not Created    ${BOOKING_INFO}[input.time]
+
+TC_08 Diary - Add Sick note
+    [Documentation]    Verifies that a practitioner can create and verify a Sick Note (Medical Certificate) for a selected patient, including population, signature, and sending/printing, with all data and logs correctly recorded.
+    Select Menu In Navigation Wheel    ${DIARY_MODULE}
+    Select Existing Booking For Patient    ${EXISTING_DEBTOR_NAME}
+    Open Clinical Forms For Selected Patient
+    Select Sick Note Form
+    Fill Sick Note Form    &{SICK_NOTE_INFO}
+    Save Sick Note Form
+    Sign Sick Note Electronically
+    Send Sick Note Via Email
+    Print Sick Note
+    Validate Sick Note Saved In Clinical Record    ${EXISTING_DEBTOR_NAME}
+    Validate Communication Logs For Sick Note    ${EXISTING_DEBTOR_NAME}
+    Validate QR Code On Sick Note Printout
