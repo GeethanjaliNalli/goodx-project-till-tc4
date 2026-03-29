@@ -1,0 +1,23 @@
+[
+  {
+    "test_case_name": "TC00002_About_ValidNavigation",
+    "Username": "validUser",
+    "Password": "ValidPass123",
+    "About_Tab": "Company",
+    "Expected_Navigation_Status": "Success"
+  },
+  {
+    "test_case_name": "TC00002_About_InvalidPassword",
+    "Username": "validUser",
+    "Password": "wrongPass",
+    "About_Tab": "Company",
+    "Expected_Navigation_Status": "Login Failed"
+  },
+  {
+    "test_case_name": "TC00002_About_MissingTab",
+    "Username": "validUser",
+    "Password": "ValidPass123",
+    "About_Tab": "",
+    "Expected_Navigation_Status": "Tab Not Found"
+  }
+]
